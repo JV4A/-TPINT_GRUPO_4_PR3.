@@ -1,0 +1,170 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AltaMedico.aspx.cs" Inherits="TP_INTEGRADOR_GRUPO_4.AltaMedico" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Alta de Paciente - Clínica Médica</title>
+    <style type="text/css">
+        .auto-style-etiqueta {
+            width: 170px;
+            height: 32px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <asp:Label ID="lblEncabezado" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#666666" Text="CLINICA MEDICA UTN - FRGP"></asp:Label>
+                    </td>
+                    <td style="text-align: right;">
+                        <asp:Label ID="lblUsuarioLogueado" runat="server" Font-Bold="True" Text="Usuario: Administrador (Admin)"></asp:Label>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                        <asp:HyperLink ID="hlCerrarSesion" runat="server" NavigateUrl="~/Login.aspx">Cerrar Sesión</asp:HyperLink>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+
+            <asp:HyperLink ID="hlVolverMenu" runat="server" NavigateUrl="~/MenuAdministrador.aspx">&lt;&lt; Volver al menú</asp:HyperLink>
+
+            <h2>Alta de Nuevo Medico</h2>
+            <p>Complete todos los datos del medico. Los campos marcados con * son obligatorios.</p>
+
+            <asp:Panel ID="pnlDatosPaciente" runat="server" GroupingText="Datos del medico">
+                <table>
+                    <tr>
+                        <td class="auto-style-etiqueta">DNI:</td>
+                        <td><asp:TextBox ID="txtDNI" runat="server" MaxLength="8" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ControlToValidate="txtDNI" ErrorMessage="Ingrese el DNI" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revDNI" runat="server" ControlToValidate="txtDNI" ErrorMessage="El DNI debe tener 7 u 8 números" ForeColor="Red" Display="Dynamic" ValidationExpression="^\d{7,8}$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Nombre:</td>
+                        <td><asp:TextBox ID="txtNombre" runat="server" MaxLength="50" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre" ErrorMessage="Ingrese el nombre" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revNombre" runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre solo puede tener letras" ForeColor="Red" Display="Dynamic" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Apellido:</td>
+                        <td><asp:TextBox ID="txtApellido" runat="server" MaxLength="50" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ControlToValidate="txtApellido" ErrorMessage="Ingrese el apellido" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revApellido" runat="server" ControlToValidate="txtApellido" ErrorMessage="El apellido solo puede tener letras" ForeColor="Red" Display="Dynamic" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Sexo:</td>
+                        <td><asp:DropDownList ID="ddlSexo" runat="server" Width="206px">
+                                <asp:ListItem Value="0">-- Seleccione --</asp:ListItem>
+                                <asp:ListItem Value="F">Femenino</asp:ListItem>
+                                <asp:ListItem Value="M">Masculino</asp:ListItem>
+                                <asp:ListItem Value="X">No binario</asp:ListItem>
+                            </asp:DropDownList></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvSexo" runat="server" ControlToValidate="ddlSexo" ErrorMessage="Seleccione el sexo" ForeColor="Red" Display="Dynamic" InitialValue="0">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Nacionalidad:</td>
+                        <td><asp:TextBox ID="txtNacionalidad" runat="server" MaxLength="40" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ControlToValidate="txtNacionalidad" ErrorMessage="Ingrese la nacionalidad" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ControlToValidate="txtNacionalidad" ErrorMessage="La nacionalidad solo puede tener letras" ForeColor="Red" Display="Dynamic" ValidationExpression="^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Fecha de nacimiento:</td>
+                        <td><asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvFechaNacimiento" runat="server" ControlToValidate="txtFechaNacimiento" ErrorMessage="Ingrese la fecha de nacimiento" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Dirección:</td>
+                        <td><asp:TextBox ID="txtDireccion" runat="server" MaxLength="100" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ControlToValidate="txtDireccion" ErrorMessage="Ingrese la dirección" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Provincia:</td>
+                        <td><asp:DropDownList ID="ddlProvincia" runat="server" Width="206px" AutoPostBack="True">
+                                <asp:ListItem Value="0">-- Seleccione --</asp:ListItem>
+                            </asp:DropDownList></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ControlToValidate="ddlProvincia" ErrorMessage="Seleccione la provincia" ForeColor="Red" Display="Dynamic" InitialValue="0">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Localidad:</td>
+                        <td><asp:DropDownList ID="ddlLocalidad" runat="server" Width="206px">
+                                <asp:ListItem Value="0">-- Seleccione --</asp:ListItem>
+                            </asp:DropDownList></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvLocalidad" runat="server" ControlToValidate="ddlLocalidad" ErrorMessage="Seleccione la localidad" ForeColor="Red" Display="Dynamic" InitialValue="0">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Email:</td>
+                        <td><asp:TextBox ID="txtEmail" runat="server" MaxLength="100" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Ingrese el email" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="El email no tiene un formato válido" ForeColor="Red" Display="Dynamic" ValidationExpression="^[\w\.\-]+@[\w\-]+(\.[\w\-]+)+$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Teléfono:</td>
+                        <td><asp:TextBox ID="txtTelefono" runat="server" MaxLength="20" Width="200px"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ControlToValidate="txtTelefono" ErrorMessage="Ingrese el teléfono" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revTelefono" runat="server" ControlToValidate="txtTelefono" ErrorMessage="El teléfono solo puede tener números y guiones" ForeColor="Red" Display="Dynamic" ValidationExpression="^[\d\- ]{6,20}$">*</asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                        <br />
+                        <asp:Label ID="LblNombreDeUsuario" runat="server" ForeColor="#666666" Text="Escriba una contraseña para el usuario"></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Contraseña:</td>
+                        <td><asp:TextBox ID="TxtContrasenia" runat="server" MaxLength="20" Width="200px" TextMode="Password"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RFVcontrasenia" runat="server" ControlToValidate="TxtContrasenia" ErrorMessage="Ingrese contraseña" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="CVcontrasenia" runat="server" ControlToValidate="TxtContrasenia" ControlToCompare="TxtRepetirContrasenia" ErrorMessage="La contraseña no coincide con repetir contraseña" ForeColor="Red" Display="Dynamic">*</asp:CompareValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style-etiqueta">Respetir contraseña:</td>
+                        <td><asp:TextBox ID="TxtRepetirContrasenia" runat="server" MaxLength="20" Width="200px" TextMode="Password"></asp:TextBox></td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RFVRepetirContrasenia" runat="server" ControlToValidate="TxtRepetirContrasenia" ErrorMessage="Repita la Contraseña" ForeColor="Red" Display="Dynamic">*</asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="CVRepetirContrasenia" runat="server" ControlToValidate="TxtRepetirContrasenia" ControlToCompare="TxtContrasenia" ErrorMessage="Repetir contraseña no coincide con contraseña " ForeColor="Red" Display="Dynamic">*</asp:CompareValidator>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <asp:Button ID="btnAceptar" runat="server" Text="Guardar Nuevo Medico" OnClick="btnAceptar_Click" />
+                &nbsp;&nbsp;
+                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CausesValidation="False" />
+                <br />
+                <asp:ValidationSummary ID="vsAltaPaciente" runat="server" ForeColor="Red" HeaderText="Revise los siguientes datos:" />
+                <asp:Label ID="lblMensaje" runat="server"></asp:Label>
+                <asp:Label ID="lblLegajoAsignado" runat="server"></asp:Label>
+                <br />
+            </asp:Panel>
+        </div>
+    </form>
+</body>
+</html>
